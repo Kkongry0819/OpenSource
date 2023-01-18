@@ -56,88 +56,88 @@ int practise()
 	if (t % 4 == 0)
 	{
 		cout << "\t\t\t\t" << a << "+" << b << "=" << endl;
-		cout << "\t\t\t\tÇëÊäÈëÕýÈ·´ð°¸£º";
+		cout << "\t\t\t\tè¯·è¾“å…¥æ­£ç¡®ç­”æ¡ˆï¼š";
 		cin >> ANSWER;
 		system("cls");
 		for (i = 2; i > 0; i--)
 		{
 			if (ANSWER == ANSWER1)
 			{
-				cout << "´ð°¸ÕýÈ·";
+				cout << "ç­”æ¡ˆæ­£ç¡®";
 				d = d + 1; break;
 			}
-			cout << "\t\t\t\t´ð°¸´íÎó,Äã»¹ÓÐ" << i << "´Î»ú»á" << endl;
-			cout << "\t\t\t\tÇëÊäÈëÕýÈ·´ð°¸£º";
+			cout << "\t\t\t\tç­”æ¡ˆé”™è¯¯,ä½ è¿˜æœ‰" << i << "æ¬¡æœºä¼š" << endl;
+			cout << "\t\t\t\tè¯·è¾“å…¥æ­£ç¡®ç­”æ¡ˆï¼š";
 			cin >> ANSWER;
 			system("cls");
 		}
-		cout << "´ð°¸Îª:" << ANSWER1 << endl;
+		cout << "ç­”æ¡ˆä¸º:" << ANSWER1 << endl;
 	}
 
 	if (t % 4 == 1)
 	{
 		cout << "\t\t\t\t" << a << "-" << b << "=" << endl;
-		cout << "\t\t\t\tÇëÊäÈëÕýÈ·´ð°¸£º";
+		cout << "\t\t\t\tè¯·è¾“å…¥æ­£ç¡®ç­”æ¡ˆï¼š";
 		cin >> ANSWER;
 		system("cls");
 		for (i = 2; i > 0; i--)
 		{
 			if (ANSWER == ANSWER2)
 			{
-				cout << "\t\t\t\t´ð°¸ÕýÈ·";
+				cout << "\t\t\t\tç­”æ¡ˆæ­£ç¡®";
 				d = d + 1; break;
 			}
-			cout << "\t\t\t\t´ð°¸´íÎó,Äã»¹ÓÐ" << i << "´Î»ú»á" << endl;
-			cout << "\t\t\t\tÇëÊäÈëÕýÈ·´ð°¸£º";
+			cout << "\t\t\t\tç­”æ¡ˆé”™è¯¯,ä½ è¿˜æœ‰" << i << "æ¬¡æœºä¼š" << endl;
+			cout << "\t\t\t\tè¯·è¾“å…¥æ­£ç¡®ç­”æ¡ˆï¼š";
 			cin >> ANSWER;
 			system("cls");
 		}
-		cout << "´ð°¸Îª:" << ANSWER2 << endl;
+		cout << "ç­”æ¡ˆä¸º:" << ANSWER2 << endl;
 	}
 
 	if (t % 4 == 2)
 	{
 		cout << "\t\t\t\t" << a << "*" << b << "=" << endl;
-		cout << "\t\t\t\tÇëÊäÈëÕýÈ·´ð°¸£º";
+		cout << "\t\t\t\tè¯·è¾“å…¥æ­£ç¡®ç­”æ¡ˆï¼š";
 		cin >> ANSWER;
 		system("cls");
 		for (i = 2; i > 0; i--)
 		{
 			if (ANSWER == ANSWER3)
 			{
-				cout << "´ð°¸ÕýÈ·";
+				cout << "ç­”æ¡ˆæ­£ç¡®";
 				d = d + 1; break;
 			}
-			cout << "\t\t\t\t´ð°¸´íÎó,Äã»¹ÓÐ" << i << "´Î»ú»á" << endl;
-			cout << "\t\t\t\tÇëÊäÈëÕýÈ·´ð°¸£º";
+			cout << "\t\t\t\tç­”æ¡ˆé”™è¯¯,ä½ è¿˜æœ‰" << i << "æ¬¡æœºä¼š" << endl;
+			cout << "\t\t\t\tè¯·è¾“å…¥æ­£ç¡®ç­”æ¡ˆï¼š";
 			cin >> ANSWER;
 			system("cls");
 		}
-		cout << "´ð°¸Îª:" << ANSWER3 << endl;
+		cout << "ç­”æ¡ˆä¸º:" << ANSWER3 << endl;
 	}
 
 	if (t % 4 == 3)
 	{
 		cout << "\t\t\t\t" << p << "/" << q << "=" << endl;
-		cout << "\t\t\t\tÇëÊäÈëÕýÈ·´ð°¸£º";
+		cout << "\t\t\t\tè¯·è¾“å…¥æ­£ç¡®ç­”æ¡ˆï¼š";
 		cin >> ANSWER;
 		system("cls");
 		for (i = 2; i > 0; i--)
 		{
 			if (ANSWER == ANSWER4)
 			{
-				cout << "´ð°¸ÕýÈ·";
+				cout << "ç­”æ¡ˆæ­£ç¡®";
 				d = d + 1; break;
 			}
-			cout << "\t\t\t\t´ð°¸´íÎó,Äã»¹ÓÐ" << i << "´Î»ú»á" << endl;
-			cout << "\t\t\t\tÇëÊäÈëÕýÈ·´ð°¸£º";
+			cout << "\t\t\t\tç­”æ¡ˆé”™è¯¯,ä½ è¿˜æœ‰" << i << "æ¬¡æœºä¼š" << endl;
+			cout << "\t\t\t\tè¯·è¾“å…¥æ­£ç¡®ç­”æ¡ˆï¼š";
 			cin >> ANSWER;
 			system("cls");
 		}
-		cout << "´ð°¸Îª:" << ANSWER4 << endl;
+		cout << "ç­”æ¡ˆä¸º:" << ANSWER4 << endl;
 	}
 
-	cout << "\t\t\t\t1.¼ÌÐøÁ·Ï°" << endl << "\t\t\t\t0.ÍË³öÁ·Ï°" << endl << "ÇëÑ¡Ôñ£º";
+	cout << "\t\t\t\t1.ç»§ç»­ç»ƒä¹ " << endl << "\t\t\t\t0.é€€å‡ºç»ƒä¹ " << endl << "è¯·é€‰æ‹©ï¼š";
 	cin >> next;
 	system("cls");
 	if (next == 1)
@@ -147,9 +147,9 @@ int practise()
 		double t1, t2;
 		t1 = d; t2 = n;
 		rate = t1 / t2 * 100;
-		cout << "×ÜÌâÊýÎª£º" << n << endl
-			<< "ÕýÈ·ÌâÊýÎª:" << d << endl
-			<< "ÕýÈ·ÂÊÎª:" << rate << "%" << endl;
+		cout << "æ€»é¢˜æ•°ä¸ºï¼š" << n << endl
+			<< "æ­£ç¡®é¢˜æ•°ä¸º:" << d << endl
+			<< "æ­£ç¡®çŽ‡ä¸º:" << rate << "%" << endl;
 	}
 	return 0;
 
@@ -161,10 +161,10 @@ int exam()
 	int ANSWER, a, b, p, q, i, p1, q1, j, ANSWER1, ANSWER2, ANSWER3, ANSWER4, c, t, next;
 	int d1 = 0;
 	double rate;
-	cout << "ÇëÊäÈëÑ§ºÅºÍÐÕÃû:";
+	cout << "è¯·è¾“å…¥å­¦å·å’Œå§“å:";
 	cin >> student[k].num >> student[k].name;
 	system("cls");
-	cout << endl << "ÇëÊäÈëÌâÁ¿:";
+	cout << endl << "è¯·è¾“å…¥é¢˜é‡:";
 	cin >> next;
 	system("cls");
 	n0 = n0 + 1;
@@ -192,17 +192,17 @@ int exam()
 		if (t % 4 == 0)
 		{
 			cout << a << "+" << b << "=" << endl;
-			cout << "ÇëÊäÈëÕýÈ·´ð°¸£º";
+			cout << "è¯·è¾“å…¥æ­£ç¡®ç­”æ¡ˆï¼š";
 			cin >> ANSWER;
 			system("cls");
 			if (ANSWER == ANSWER1)
 			{
-				cout << "´ð°¸ÕýÈ·";
+				cout << "ç­”æ¡ˆæ­£ç¡®";
 				d1 = d1 + 1;
 			}
 			else
-				cout << "´ð°¸´íÎó" << endl;
-			cout << "´ð°¸Îª:" << ANSWER1 << endl;
+				cout << "ç­”æ¡ˆé”™è¯¯" << endl;
+			cout << "ç­”æ¡ˆä¸º:" << ANSWER1 << endl;
 		}
 
 		if (t % 4 == 1)
@@ -210,66 +210,66 @@ int exam()
 			if (a >= b)
 			{
 				cout << a << "-" << b << "=" << endl;
-				cout << "ÇëÊäÈëÕýÈ·´ð°¸£º";
+				cout << "è¯·è¾“å…¥æ­£ç¡®ç­”æ¡ˆï¼š";
 				cin >> ANSWER;
 				system("cls");
 				if (ANSWER == ANSWER2)
 				{
-					cout << "´ð°¸ÕýÈ·";
+					cout << "ç­”æ¡ˆæ­£ç¡®";
 					d1 = d1 + 1;
 				}
 				else
-					cout << "´ð°¸´íÎó" << endl;
-				cout << "´ð°¸Îª:" << ANSWER2 << endl;
+					cout << "ç­”æ¡ˆé”™è¯¯" << endl;
+				cout << "ç­”æ¡ˆä¸º:" << ANSWER2 << endl;
 			}
 			else
 			{
 				j = a; a = b; b = j;
 				cout << a << "-" << b << "=" << endl;
-				cout << "ÇëÊäÈëÕýÈ·´ð°¸£º";
+				cout << "è¯·è¾“å…¥æ­£ç¡®ç­”æ¡ˆï¼š";
 				cin >> ANSWER;
 				system("cls");
 				if (ANSWER == ANSWER2)
 				{
-					cout << "´ð°¸ÕýÈ·";
+					cout << "ç­”æ¡ˆæ­£ç¡®";
 					d1 = d1 + 1;
 				}
 				else
-					cout << "´ð°¸´íÎó" << endl;
-				cout << "´ð°¸Îª:" << ANSWER2 << endl;
+					cout << "ç­”æ¡ˆé”™è¯¯" << endl;
+				cout << "ç­”æ¡ˆä¸º:" << ANSWER2 << endl;
 			}
 		}
 
 		if (t % 4 == 2)
 		{
 			cout << a << "*" << b << "=" << endl;
-			cout << "ÇëÊäÈëÕýÈ·´ð°¸£º";
+			cout << "è¯·è¾“å…¥æ­£ç¡®ç­”æ¡ˆï¼š";
 			cin >> ANSWER;
 			system("cls");
 			if (ANSWER == ANSWER3)
 			{
-				cout << "´ð°¸ÕýÈ·";
+				cout << "ç­”æ¡ˆæ­£ç¡®";
 				d1 = d1 + 1;
 			}
 			else
-				cout << "´ð°¸´íÎó£¡" << endl;
-			cout << "´ð°¸Îª:" << ANSWER3 << endl;
+				cout << "ç­”æ¡ˆé”™è¯¯ï¼" << endl;
+			cout << "ç­”æ¡ˆä¸º:" << ANSWER3 << endl;
 		}
 
 		if (t % 4 == 3)
 		{
 			cout << p << "/" << q << "=" << endl;
-			cout << "ÇëÊäÈëÕýÈ·´ð°¸£º";
+			cout << "è¯·è¾“å…¥æ­£ç¡®ç­”æ¡ˆï¼š";
 			cin >> ANSWER;
 			system("cls");
 			if (ANSWER == ANSWER4)
 			{
-				cout << "´ð°¸ÕýÈ·";
+				cout << "ç­”æ¡ˆæ­£ç¡®";
 				d1 = d1 + 1;
 			}
 			else
-				cout << "´ð°¸´íÎó£¡" << endl;
-			cout << "´ð°¸Îª:" << ANSWER4 << endl;
+				cout << "ç­”æ¡ˆé”™è¯¯ï¼" << endl;
+			cout << "ç­”æ¡ˆä¸º:" << ANSWER4 << endl;
 		}
 	}
 
@@ -278,14 +278,14 @@ int exam()
 	t1 = d1; t2 = next;
 	rate = t1 / t2 * 100;
 	student[k].score = rate;
-	cout << "ÄãµÄ·ÖÊýÎª£º" << student[k].score;
+	cout << "ä½ çš„åˆ†æ•°ä¸ºï¼š" << student[k].score;
 	k = k + 1;
 	return 0;
 }
 int query()
 {
 	int a, i, k1;
-	cout << endl << "ÇëÊäÈëÄúÒª²éÑ¯µÄÑ§ÉúÑ§ºÅ:";
+	cout << endl << "è¯·è¾“å…¥æ‚¨è¦æŸ¥è¯¢çš„å­¦ç”Ÿå­¦å·:";
 	cin >> a;
 	system("cls");
 	cout << endl;
@@ -294,12 +294,12 @@ int query()
 		if (a == student[i].num)
 		{
 			k1 = i;
-			cout << "¸ÃÑ§ÉúµÄ·ÖÊýÎª£º" << student[k1].score << endl;
+			cout << "è¯¥å­¦ç”Ÿçš„åˆ†æ•°ä¸ºï¼š" << student[k1].score << endl;
 			break;
 		}
 	}
 	if (i == n0)
-		cout << "²éÎÞ´ËÈË,¼ì²éÒ»ÏÂÊÇ·ñÊäÈëÕýÈ·£¡" << endl;
+		cout << "æŸ¥æ— æ­¤äºº,æ£€æŸ¥ä¸€ä¸‹æ˜¯å¦è¾“å…¥æ­£ç¡®ï¼" << endl;
 	return 0;
 }
 int sort()
@@ -320,7 +320,7 @@ int sort()
 int del()
 {
 	int b, i, h;
-	cout << endl << "ÇëÊäÈëÄúÒªÉ¾³ýµÄÑ§ÉúÑ§ºÅ:";
+	cout << endl << "è¯·è¾“å…¥æ‚¨è¦åˆ é™¤çš„å­¦ç”Ÿå­¦å·:";
 	cin >> b;
 	system("cls");
 	cout << endl;
@@ -337,20 +337,20 @@ int del()
 		}
 	}
 	if (h == n0)
-		cout << "²»ÄÜÉ¾³ýÄÅ" << endl;
+		cout << "ä¸èƒ½åˆ é™¤å‘" << endl;
 	return 0;
 }
 int menu()
 {
 	int choose;
-	cout << "»¶Ó­ÄãÀ´µ½Ð¡Ñ§ÉúËãÊý" << endl;
-	cout << "1.¼ÆËãÁ·Ï°" << endl << endl;
-	cout << "2.¼ÆËã¿¼ÊÔ" << endl << endl;
-	cout << "3.³É¼¨²éÑ¯" << endl << endl;
-	cout << "4.³É¼¨ÅÅÐò" << endl << endl;
-	cout << "5.³É¼¨É¾³ý" << endl << endl;
-	cout << "0.ÍË³ö" << endl;
-	cout << "ÇëÑ¡Ôñ£º";
+	cout << "æ¬¢è¿Žä½ æ¥åˆ°å°å­¦ç”Ÿç®—æ•°" << endl;
+	cout << "1.è®¡ç®—ç»ƒä¹ " << endl << endl;
+	cout << "2.è®¡ç®—è€ƒè¯•" << endl << endl;
+	cout << "3.æˆç»©æŸ¥è¯¢" << endl << endl;
+	cout << "4.æˆç»©æŽ’åº" << endl << endl;
+	cout << "5.æˆç»©åˆ é™¤" << endl << endl;
+	cout << "0.é€€å‡º" << endl;
+	cout << "è¯·é€‰æ‹©ï¼š";
 	cin >> choose;
 	system("cls");
 	switch (choose)
