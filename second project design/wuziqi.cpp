@@ -273,13 +273,13 @@ char arrY[] = "Y";
 char arry[] = "y";
 char arrN[] = "N";
 char arrn[] = "n";
-// ÆåÅÌÀà
+// æ£‹ç›˜ç±»
 class Board
 {
 
 public:
     friend class player;
-    Board() // ¹¹Ôìº¯Êı£¬³õÊ¼»¯ÆåÅÌ
+    Board() // æ„é€ å‡½æ•°ï¼Œåˆå§‹åŒ–æ£‹ç›˜
     {
         for (int i = 0; i < BOARD_SIZE; i++)
         {
@@ -292,7 +292,7 @@ public:
     bool display()
     {
         char arr[5];
-        cout << "ÊÇ·ñÏëÔÙÍæÒ»°Ñ£¿(Y/N)" << endl;
+        cout << "æ˜¯å¦æƒ³å†ç©ä¸€æŠŠï¼Ÿ(Y/N)" << endl;
         cin >> arr;
         if (strcmp(arr, arrY) == 0 || strcmp(arr, arry) == 0)
             return true;
@@ -309,7 +309,7 @@ public:
             }
         }
     }
-    // »æÖÆÆåÅÌ
+    // ç»˜åˆ¶æ£‹ç›˜
     void draw()
     {
         cout << " ";
@@ -330,40 +330,40 @@ public:
         }
     }
 
-    // ÅĞ¶ÏÄ³¸öÎ»ÖÃÊÇ·ñÎª¿Õ
+    // åˆ¤æ–­æŸä¸ªä½ç½®æ˜¯å¦ä¸ºç©º
     bool isEmpty(int x, int y)
     {
         return board[x][y] == '+';
     }
 
-    // ÅĞ¶ÏÄ³¸öÎ»ÖÃÊÇ·ñÎªºÚ×Ó
+    // åˆ¤æ–­æŸä¸ªä½ç½®æ˜¯å¦ä¸ºé»‘å­
     bool isBlack(int x, int y)
     {
         return board[x][y] == 'X';
     }
 
-    // ÅĞ¶ÏÄ³¸öÎ»ÖÃÊÇ·ñÎª°××Ó
+    // åˆ¤æ–­æŸä¸ªä½ç½®æ˜¯å¦ä¸ºç™½å­
     bool isWhite(int x, int y)
     {
         return board[x][y] == 'O';
     }
 
-    // ÏÂºÚ×Ó
+    // ä¸‹é»‘å­
     void putBlack(int x, int y)
     {
         board[x][y] = 'X';
     }
 
-    // ÏÂ°××Ó
+    // ä¸‹ç™½å­
     void putWhite(int x, int y)
     {
         board[x][y] = 'O';
     }
 
-    // ÅĞ¶ÏÊÇ·ñÊ¤Àû
+    // åˆ¤æ–­æ˜¯å¦èƒœåˆ©
     bool isWin(int x, int y)
     {
-        // ÅĞ¶ÏË®Æ½·½ÏòÊÇ·ñÓĞÎå¸öÁ¬ĞøµÄÍ¬É«Æå×Ó
+        // åˆ¤æ–­æ°´å¹³æ–¹å‘æ˜¯å¦æœ‰äº”ä¸ªè¿ç»­çš„åŒè‰²æ£‹å­
         int count = 1;
         for (int i = y - 1; i >= 0 && isBlack(x, i); i--)
         {
@@ -378,7 +378,7 @@ public:
             return true;
         }
 
-        // ÅĞ¶ÏÊúÖ±·½ÏòÊÇ·ñÓĞÎå¸öÁ¬ĞøµÄÍ¬É«Æå×Ó
+        // åˆ¤æ–­ç«–ç›´æ–¹å‘æ˜¯å¦æœ‰äº”ä¸ªè¿ç»­çš„åŒè‰²æ£‹å­
         count = 1;
         for (int i = x - 1; i >= 0 && isBlack(i, y); i--)
         {
@@ -393,7 +393,7 @@ public:
             return true;
         }
 
-        // ÅĞ¶Ï×óÉÏµ½ÓÒÏÂ·½ÏòÊÇ·ñÓĞÎå¸öÁ¬ĞøµÄÍ¬É«Æå×Ó
+        // åˆ¤æ–­å·¦ä¸Šåˆ°å³ä¸‹æ–¹å‘æ˜¯å¦æœ‰äº”ä¸ªè¿ç»­çš„åŒè‰²æ£‹å­
         count = 1;
         for (int i = x - 1, j = y - 1; i >= 0 && j >= 0 && isBlack(i, j); i--, j--)
         {
@@ -407,7 +407,7 @@ public:
         {
             return true;
         }
-        // ÅĞ¶ÏÓÒÉÏµ½×óÏÂ·½ÏòÊÇ·ñÓĞÎå¸öÁ¬ĞøµÄÍ¬É«Æå×Ó
+        // åˆ¤æ–­å³ä¸Šåˆ°å·¦ä¸‹æ–¹å‘æ˜¯å¦æœ‰äº”ä¸ªè¿ç»­çš„åŒè‰²æ£‹å­
         count = 1;
         for (int i = x - 1, j = y + 1; i >= 0 && j < BOARD_SIZE && isBlack(i, j); i--, j++)
         {
@@ -422,7 +422,7 @@ public:
             return true;
         }
 
-        // ÅĞ¶ÏË®Æ½·½ÏòÊÇ·ñÓĞÎå¸öÁ¬ĞøµÄÍ¬É«Æå×Ó
+        // åˆ¤æ–­æ°´å¹³æ–¹å‘æ˜¯å¦æœ‰äº”ä¸ªè¿ç»­çš„åŒè‰²æ£‹å­
         count = 1;
         for (int i = y - 1; i >= 0 && isWhite(x, i); i--)
         {
@@ -437,7 +437,7 @@ public:
             return true;
         }
 
-        // ÅĞ¶ÏÊúÖ±·½ÏòÊÇ·ñÓĞÎå¸öÁ¬ĞøµÄÍ¬É«Æå×Ó
+        // åˆ¤æ–­ç«–ç›´æ–¹å‘æ˜¯å¦æœ‰äº”ä¸ªè¿ç»­çš„åŒè‰²æ£‹å­
         count = 1;
         for (int i = x - 1; i >= 0 && isWhite(i, y); i--)
         {
@@ -452,7 +452,7 @@ public:
             return true;
         }
 
-        // ÅĞ¶Ï×óÉÏµ½ÓÒÏÂ·½ÏòÊÇ·ñÓĞÎå¸öÁ¬ĞøµÄÍ¬É«Æå×Ó
+        // åˆ¤æ–­å·¦ä¸Šåˆ°å³ä¸‹æ–¹å‘æ˜¯å¦æœ‰äº”ä¸ªè¿ç»­çš„åŒè‰²æ£‹å­
         count = 1;
         for (int i = x - 1, j = y - 1; i >= 0 && j >= 0 && isWhite(i, j); i--, j--)
         {
@@ -467,7 +467,7 @@ public:
             return true;
         }
 
-        // ÅĞ¶ÏÓÒÉÏµ½×óÏÂ·½ÏòÊÇ·ñÓĞÎå¸öÁ¬ĞøµÄÍ¬É«Æå×Ó
+        // åˆ¤æ–­å³ä¸Šåˆ°å·¦ä¸‹æ–¹å‘æ˜¯å¦æœ‰äº”ä¸ªè¿ç»­çš„åŒè‰²æ£‹å­
         count = 1;
         for (int i = x - 1, j = y + 1; i >= 0 && j < BOARD_SIZE && isWhite(i, j); i--, j++)
         {
@@ -499,7 +499,7 @@ class player
         {
             if (a.board[x][y] != '+' || x > BOARD_SIZE || x<0 || y>BOARD_SIZE || y < 0)
             {
-                cout << "ÄãÊäÈëÁËÒ»¸ö·Ç·¨Öµ£¡\n";
+                cout << "ä½ è¾“å…¥äº†ä¸€ä¸ªéæ³•å€¼ï¼\n";
                 return true;
             }
         else
@@ -523,14 +523,14 @@ class player
             if (color == 'X')
             {
                 score[0]++;
-                strcpy(name, "ºÚÆå");
+                strcpy(name, "é»‘æ£‹");
             }
             else
             {
                 score[1]++;
-                strcpy(name, "°×Æå");
+                strcpy(name, "ç™½æ£‹");
             }    
-            cout << name << "Ó®ÁË£¡" << endl;
+            cout << name << "èµ¢äº†ï¼" << endl;
         }
 
     private: 
@@ -543,7 +543,7 @@ class computerplayer
 void menu()
 {
     cout << "######################################\n";
-    cout << "###########»¶Ó­À´µ½Îå×ÓÆå£¡###########\n";
+    cout << "###########æ¬¢è¿æ¥åˆ°äº”å­æ£‹ï¼###########\n";
     cout << "######################################\n";
     Sleep(1500);
     system("cls");
@@ -553,12 +553,12 @@ int Choose()
 int choose;
     begin:
     cout << "##########################################################\n";
-    cout << "########1 ÈË»ú¶Ô¿¹   2 Ë«ÈË¶Ô¿¹   3 ¹æÔò    0 ÍË³ö########\n";
+    cout << "########1 äººæœºå¯¹æŠ—   2 åŒäººå¯¹æŠ—   3 è§„åˆ™    0 é€€å‡º########\n";
     cout << "##########################################################\n";
     cin >> choose;
 if (choose != 1 && choose != 2  && choose !=3 &&  choose!=0)
 {
-    cout << "ÇëÖØĞÂÊäÈë!\n";
+    cout << "è¯·é‡æ–°è¾“å…¥!\n";
     goto begin;
 }
 else
@@ -567,7 +567,7 @@ else
     {
         int color;
         Begin:
-        cout << "ÇëÑ¡ÔñÄãÏëÒªÊ¹ÓÃµÄÆå×Ó\n0   ºÚÆå 1   °×Æå\n";
+        cout << "è¯·é€‰æ‹©ä½ æƒ³è¦ä½¿ç”¨çš„æ£‹å­\n0   é»‘æ£‹ 1   ç™½æ£‹\n";
         cin >> color;
         if (color == 0 || color == 1)
         {
@@ -575,7 +575,7 @@ else
         }
         else
         {
-            cout << "ÊäÈë´íÎó£¬ÇëÖØĞÂÊäÈë£¡\n";
+            cout << "è¾“å…¥é”™è¯¯ï¼Œè¯·é‡æ–°è¾“å…¥ï¼\n";
             goto Begin;
         }
     }
@@ -611,7 +611,7 @@ int main()
             bool WIN = false;
             while (flag)
             {
-                cout << "ÇëºÚÆåÍæ¼ÒÊäÈëÂä×ÓÎ»ÖÃ\n";
+                cout << "è¯·é»‘æ£‹ç©å®¶è¾“å…¥è½å­ä½ç½®\n";
                 cin >> x >> y;
                 flag = A.isVaild(x, y, table);
                 table.draw();
@@ -619,14 +619,14 @@ int main()
             if (table.isWin(x, y))
             {
                 A.display_WIN();
-                WIN = true;//Ìø³öÑ­»·
+                WIN = true;//è·³å‡ºå¾ªç¯
                 flag = false;
             }
             else
                 flag = true;
             while(flag)
             {
-                cout << "Çë°×ÆåÍæ¼ÒÊäÈëÂä×ÓÎ»ÖÃ\n";
+                cout << "è¯·ç™½æ£‹ç©å®¶è¾“å…¥è½å­ä½ç½®\n";
                 cin >> x >> y;
                 flag=B.isVaild(x, y, table);
                 table.draw();
