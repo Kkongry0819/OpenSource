@@ -262,17 +262,27 @@
 #include <iostream>
 #include <cstdlib>
 #include <ctime>
-#include<string.h>
+#include<cstring>
+#include <iomanip> 
 #include"color.h"
+#include<vector>
+#include"AI.h"
+#include<stdlib.h>
+#include<time.h>
 using namespace std;
 
 const int BOARD_SIZE = 15;
 const int WIN_COUNT = 5;
-int score[3];
-char arrY[] = "Y";
-char arry[] = "y";
-char arrN[] = "N";
-char arrn[] = "n";
+int score[4];
+const char arrY[] = "Y";
+const char arry[] = "y";
+const char arrN[] = "N";
+const char arrn[] = "n";
+typedef struct AISET
+{
+    int x;
+    int y;
+}ai;
 // 棋盘类
 class Board
 {
@@ -289,9 +299,19 @@ public:
             }
         }
     }
+    int get_data(int row,int col)
+    {
+        if (board[row][col] == 'X')//黑棋返回1
+            return 1;
+        else if (board[row][col] == 'O')
+            return -1;
+        else
+            return 0;
+    }
     bool display()
     {
         char arr[5];
+        cout << "当前比分" << endl << "黑棋  " << score[0] << "  " << "白棋" << score[1]<<endl;
         cout << "是否想再玩一把？(Y/N)" << endl;
         cin >> arr;
         if (strcmp(arr, arrY) == 0 || strcmp(arr, arry) == 0)
@@ -312,19 +332,46 @@ public:
     // 绘制棋盘
     void draw()
     {
-        cout << " ";
+        cout << "  ";
         for (int i = 0; i < BOARD_SIZE; i++)
         {
-            cout << " " << i + 1;
+            if (i < 9)
+                cout << " " << i + 1;
+            else
+                cout << " "<<(char)(i + 56);
         }
         cout << endl;
 
         for (int i = 0; i < BOARD_SIZE; i++)
         {
-            cout << i + 1 << " ";
+            if(i<9)
+            {
+                cout << " "<<i + 1 << " ";
+            }
+            else
+            {
+                cout << " "<<(char)(i + 56) << " ";
+            }
             for (int j = 0; j < BOARD_SIZE; j++)
             {
-                cout << board[i][j] << " ";
+                if (board[i][j] == 'X')
+                {
+                    color(4);
+                    cout << board[i][j] << " ";
+                    color(7);
+                }
+                else if (board[i][j] == 'O')
+                {
+                    color(6);
+                    cout << board[i][j] << " ";
+                    color(7);
+                }
+                else
+                {
+                    color(3);
+                    cout << board[i][j] << " ";
+                    color(7);
+                }
             }
             cout << endl;
         }
@@ -333,43 +380,49 @@ public:
     // 判断某个位置是否为空
     bool isEmpty(int x, int y)
     {
-        return board[x][y] == '+';
+        return board[x-1][y-1] == '+';
     }
 
     // 判断某个位置是否为黑子
-    bool isBlack(int x, int y)
+    bool isBlack(int x, int y)//传进来的都是已经修正过的值
     {
-        return board[x][y] == 'X';
+        if (board[x][y] == 'X')
+            return true;
+        else
+            return false;
     }
 
     // 判断某个位置是否为白子
     bool isWhite(int x, int y)
     {
-        return board[x][y] == 'O';
+        if (board[x][y] == 'O')
+            return true;
+        else
+            return false;
     }
 
     // 下黑子
     void putBlack(int x, int y)
     {
-        board[x][y] = 'X';
+        board[x-1][y-1] = 'X';
     }
 
     // 下白子
     void putWhite(int x, int y)
     {
-        board[x][y] = 'O';
+        board[x-1][y-1] = 'O';
     }
 
     // 判断是否胜利
-    bool isWin(int x, int y)
+    bool isWin_black(int x, int y)
     {
         // 判断水平方向是否有五个连续的同色棋子
         int count = 1;
-        for (int i = y - 1; i >= 0 && isBlack(x, i); i--)
+        for (int i = y - 2; i >= 0 && isBlack(x - 1, i); i--)
         {
             count++;
         }
-        for (int i = y + 1; i < BOARD_SIZE && isBlack(x, i); i++)
+        for (int i = y; i < BOARD_SIZE && isBlack(x - 1, i); i++)
         {
             count++;
         }
@@ -380,11 +433,11 @@ public:
 
         // 判断竖直方向是否有五个连续的同色棋子
         count = 1;
-        for (int i = x - 1; i >= 0 && isBlack(i, y); i--)
+        for (int i = x - 2; i >= 0 && isBlack(i, y - 1); i--)
         {
             count++;
         }
-        for (int i = x + 1; i < BOARD_SIZE && isBlack(i, y); i++)
+        for (int i = x; i < BOARD_SIZE && isBlack(i, y - 1); i++)
         {
             count++;
         }
@@ -395,11 +448,11 @@ public:
 
         // 判断左上到右下方向是否有五个连续的同色棋子
         count = 1;
-        for (int i = x - 1, j = y - 1; i >= 0 && j >= 0 && isBlack(i, j); i--, j--)
+        for (int i = x - 2, j = y - 2; i >= 0 && j >= 0 && isBlack(i, j); i--, j--)
         {
             count++;
         }
-        for (int i = x + 1, j = y + 1; i < BOARD_SIZE && j < BOARD_SIZE && isBlack(i, j); i++, j++)
+        for (int i = x, j = y; i < BOARD_SIZE && j < BOARD_SIZE && isBlack(i, j); i++, j++)
         {
             count++;
         }
@@ -409,11 +462,11 @@ public:
         }
         // 判断右上到左下方向是否有五个连续的同色棋子
         count = 1;
-        for (int i = x - 1, j = y + 1; i >= 0 && j < BOARD_SIZE && isBlack(i, j); i--, j++)
+        for (int i = x - 2, j = y; i >= 0 && j < BOARD_SIZE && isBlack(i, j); i--, j++)
         {
             count++;
         }
-        for (int i = x + 1, j = y - 1; i < BOARD_SIZE && j >= 0 && isBlack(i, j); i++, j--)
+        for (int i = x, j = y - 2; i < BOARD_SIZE && j >= 0 && isBlack(i, j); i++, j--)
         {
             count++;
         }
@@ -421,14 +474,18 @@ public:
         {
             return true;
         }
+        return false;
 
+    }
+    bool isWin_white(int x, int y)
+    {
         // 判断水平方向是否有五个连续的同色棋子
-        count = 1;
-        for (int i = y - 1; i >= 0 && isWhite(x, i); i--)
+        int count = 1;
+        for (int i = y - 2; i >= 0 && isWhite(x-1, i); i--)
         {
             count++;
         }
-        for (int i = y + 1; i < BOARD_SIZE && isWhite(x, i); i++)
+        for (int i = y ; i < BOARD_SIZE && isWhite(x-1, i); i++)
         {
             count++;
         }
@@ -439,11 +496,11 @@ public:
 
         // 判断竖直方向是否有五个连续的同色棋子
         count = 1;
-        for (int i = x - 1; i >= 0 && isWhite(i, y); i--)
+        for (int i = x - 2; i >= 0 && isWhite(i, y-1); i--)
         {
             count++;
         }
-        for (int i = x + 1; i < BOARD_SIZE && isWhite(i, y); i++)
+        for (int i = x ; i < BOARD_SIZE && isWhite(i, y-1); i++)
         {
             count++;
         }
@@ -454,11 +511,11 @@ public:
 
         // 判断左上到右下方向是否有五个连续的同色棋子
         count = 1;
-        for (int i = x - 1, j = y - 1; i >= 0 && j >= 0 && isWhite(i, j); i--, j--)
+        for (int i = x - 2, j = y - 2; i >= 0 && j >= 0 && isWhite(i, j); i--, j--)
         {
             count++;
         }
-        for (int i = x + 1, j = y + 1; i < BOARD_SIZE && j < BOARD_SIZE && isWhite(i, j); i++, j++)
+        for (int i = x , j = y ; i < BOARD_SIZE && j < BOARD_SIZE && isWhite(i, j); i++, j++)
         {
             count++;
         }
@@ -469,11 +526,11 @@ public:
 
         // 判断右上到左下方向是否有五个连续的同色棋子
         count = 1;
-        for (int i = x - 1, j = y + 1; i >= 0 && j < BOARD_SIZE && isWhite(i, j); i--, j++)
+        for (int i = x - 2, j = y ; i >= 0 && j < BOARD_SIZE && isWhite(i, j); i--, j++)
         {
             count++;
         }
-        for (int i = x + 1, j = y - 1; i < BOARD_SIZE && j >= 0 && isWhite(i, j); i++, j--)
+        for (int i = x , j = y - 2; i < BOARD_SIZE && j >= 0 && isWhite(i, j); i++, j--)
         {
             count++;
         }
@@ -497,9 +554,18 @@ class player
         }
         bool isVaild(int x, int y,Board & a)
         {
-            if (a.board[x][y] != '+' || x > BOARD_SIZE || x<0 || y>BOARD_SIZE || y < 0)
+            if (a.board[x-1][y-1] != '+' || x-1 > BOARD_SIZE || x-1<0 || y-1>BOARD_SIZE || y-1 < 0)
             {
-                cout << "你输入了一个非法值！\n";
+                if (a.isWhite(x-1, y-1))
+                {
+                    cout<<"你下在白棋上了！"<<endl;
+                }
+                else if (a.isBlack(x-1, y-1))
+                {
+                    cout << "你下在黑棋上了！" << endl;
+                }
+                else
+                    cout << "你输入了一个非法值！\n";
                 return true;
             }
         else
@@ -532,126 +598,489 @@ class player
             }    
             cout << name << "赢了！" << endl;
         }
-
+        void display_AI_WIN()
+        {
+            score[2]++;
+            cout << "玩家获得胜利！" << endl;
+        }
     private: 
     char color;
 };
-class computerplayer
+class ComputerPlayer
+{
+public:
+    ai AICalculate(Board& a);
+
+};
+ai ComputerPlayer::AICalculate(Board& a)
 {
 
+    int scoreMap[BOARD_SIZE][BOARD_SIZE];//期望（权重）表
+    int playernum = 0;
+    int ainum = 0;
+    int emptynum = 0;
+    for (int i = 0;i < BOARD_SIZE;i++)
+    {
+        for (int j = 0;j < BOARD_SIZE;j++)
+        {
+            scoreMap[i][j] = 0;
+        }
+    }
+    for (int row = 0;row < BOARD_SIZE;row++)
+    {
+        for (int col = 0;col < BOARD_SIZE;col++)
+        {
+
+            if (a.get_data(row, col))continue;
+            for (int y = -1;y <= 0;y++)
+            {
+                for (int x = -1;x <= 1;x++)
+                {
+                    
+                    if (y == 0 && x != 1)
+                    {
+                        continue;
+                    }
+                    playernum = 0;
+                    ainum = 0;
+                    emptynum = 0;
+                    for (int i = 1;i <= 4;i++)
+                    {
+                        int currow = row + i * y;//相对横竖坐标
+                        int curcol = col + i * x;
+                        if (currow >= 0 && currow < BOARD_SIZE && curcol >= 0 && curcol < BOARD_SIZE && a.get_data(currow, curcol) == 1)
+                        {
+                            playernum++;
+                        }
+                        else if (currow >= 0 && currow < BOARD_SIZE && curcol >= 0 && curcol < BOARD_SIZE && a.get_data(currow, curcol) == 0)
+                        {
+                            emptynum++;
+                            break;
+                        }
+                        else
+                            break;
+                    }
+                    for (int i = 1; i <= 4; i++)
+                    {
+                        int curRow = row - i * y;
+                        int curCol = col - i * x;
+
+                        if (curRow >= 0 && curRow < BOARD_SIZE && curCol >= 0 && curCol < BOARD_SIZE && a.get_data(curRow, curCol) == 1)
+                        {
+                            playernum++;
+                        }
+                        else if (curRow >= 0 && curRow < BOARD_SIZE && curCol >= 0 && curCol < BOARD_SIZE && a.get_data(curRow, curCol) == 0)
+                        {
+                            emptynum++;
+                            break;
+                        }
+                        else
+                            break;
+                    }
+                    if (playernum == 1)
+                    {
+                        scoreMap[row][col] += 10;
+                    }
+                    else if (playernum == 2)
+                    {
+                        if (emptynum == 1)
+                        {
+                            scoreMap[row][col] += 30;
+                        }
+                        else if (emptynum == 2)
+                        {
+                            scoreMap[row][col] += 40;
+                        }
+                    }
+                    else if (playernum == 3)
+                    {
+                        if (emptynum == 1)
+                        {
+                            scoreMap[row][col] += 60;
+                        }
+                        else if (emptynum == 2) {
+                            scoreMap[row][col] += 5000;
+                        }
+                    }
+                    else if (playernum == 4) {
+                        scoreMap[row][col] += 20000;
+                    }
+                    emptynum = 0;
+                    for (int i = 1; i <= 4; i++)
+                    {
+                        int curRow = row + i * y;
+                        int curCol = col + i * x;
+
+                        if (curRow >= 0 && curRow < BOARD_SIZE && curCol >= 0 && curCol < BOARD_SIZE && a.get_data(curRow, curCol) == -1)
+                        {
+                            ainum++;
+                        }
+                        else if (curRow >= 0 && curRow < BOARD_SIZE && curCol >= 0 && curCol < BOARD_SIZE && a.get_data(curRow, curCol) == 0)
+                        {
+                            emptynum++;
+                            break;
+                        }
+                        else {
+                            break;
+                        }
+                    }
+
+                    for (int i = 1; i <= 4; i++) 
+                    {
+                        int curRow = row - i * y;
+                        int curCol = col - i * x;
+
+                        if (curRow >= 0 && curRow < BOARD_SIZE && curCol >= 0 && curCol < BOARD_SIZE && a.get_data(curRow, curCol) == -1)
+                        {
+                            ainum++;
+                        }
+
+                        else if (curRow >= 0 && curRow < BOARD_SIZE && curCol >= 0 && curCol < BOARD_SIZE && a.get_data(curRow, curCol) == 0)
+                        {
+                            emptynum++;
+                            break;
+                        }
+                        else {
+                            break;
+                        }
+                    }
+
+                    if (ainum == 0)
+                    {
+                        scoreMap[row][col] += 5;
+                    }
+                    else if (ainum == 1)
+                    {
+                        scoreMap[row][col] += 10;
+                    }
+                    else if (ainum == 2)
+                    {
+                        if (emptynum == 1)
+                        {
+                            scoreMap[row][col] += 25;
+                        }
+                        else if (emptynum == 2)
+                        {
+                            scoreMap[row][col] += 50;
+                        }
+                    }
+                    else if (ainum == 3)
+                    {
+                        if (emptynum == 1)
+                        {
+                            scoreMap[row][col] += 55;
+                        }
+                        else if (emptynum == 2)
+                        {
+                            scoreMap[row][col] += 10000;
+                        }
+                    }
+                    else if (ainum >= 4)
+                    {
+                        scoreMap[row][col] += 30000;
+                    }
+                }
+            }
+        }
+    }
+    int MAX = 0;
+    vector<ai> maxPoints;
+    int ROW = 0, COL = 0;
+    ai AK47;
+    AK47.x = 0;
+    AK47.y = 0;
+    for (ROW = 0;ROW < BOARD_SIZE;ROW++)
+    {
+        for (COL = 0;COL < BOARD_SIZE;COL++)
+        {
+            if (a.get_data(ROW, COL) == 0)
+            {
+                if (scoreMap[ROW][COL] > MAX)
+                {
+                    MAX = scoreMap[ROW][COL];
+                    maxPoints.clear();
+                    AK47.x = ROW;
+                    AK47.y = COL;
+                    maxPoints.push_back(AK47);
+                }
+                else if (scoreMap[ROW][COL] == MAX)
+                {
+                    AK47.x = ROW;
+                    AK47.y = COL;
+                    maxPoints.push_back(AK47);
+                }
+            }
+        }
+    }
+    int index = rand() % maxPoints.size();
+    return maxPoints[index];
+}
+class Game
+{
+public:
+    void rule()
+    {
+        cout <<"1 人机对抗，玩家默认为黑棋先手\n";
+        cout << "2 双人对抗，在下棋前可选择黑白棋谁先先手。\n";
+        cout << "A对应10,B对应11，以此类推。\n";
+        cout << "游戏规则：本游戏无禁手规则，黑白双方依次落子，由黑先下，当棋盘上有三个子时(两黑一白),\n"
+             <<"如果此时白方觉得开的局不利于自已可以提出交换, 黑方无条件接受!也可以不交换, 主动权在白方!\n"
+             <<"然后继续下棋, 任一方先在棋盘上形成横向、竖向、斜向的连续的相同颜色的五个(含五个以上)棋子的一方为胜。\n";
+        system("pause");
+        system("cls");
+    }
+    int Choose()
+    {
+        int choose;
+    begin:
+        cout << "##########################################################\n";
+        cout << "########1 人机对抗   2 双人对抗   3 规则    0 退出########\n";
+        cout << "##########################################################\n";
+        cin >> choose;
+        if (choose != 1 && choose != 2 && choose != 3 && choose != 0)
+        {
+            cout << "请重新输入!\n";
+            goto begin;
+        }
+        else
+        {
+            if (choose == 1)
+            {
+                return 1;
+            }
+            else if (choose == 2)
+            {
+                return 3;
+            }
+            else if (choose == 3)
+            {
+                rule();
+                goto begin;
+            }
+            else if (choose == 0)
+            {
+                color(0x0C);
+                cout << "制作人：";
+                color(0x0E);
+                cout << "陈瑞泽\n\a";
+                color(7);
+                Sleep(1500);
+                exit;
+            }
+        }
+    }
+    void menu2(Game& game,Board table,player &A,player& B,ComputerPlayer&AI)
+    {
+        begin:
+        int a = game.Choose();
+        if (a == 3)
+        {
+        AGAIN:
+            int x, y;
+            char temp1;
+            char temp2;
+            int i = 0;
+            table.draw();
+            while (1) {
+                bool flag = true;
+                bool WIN = false;
+                while (flag)
+                {
+                    cout << "请黑棋玩家输入落子位置\n";
+                    cin >> temp1 >> temp2;
+                    fflush(stdin);
+                    if (temp1 >= 49 && temp1 <= 57 || temp1 >= 65 && temp1 <= 70)
+                    {
+                        if (temp1 >= 49 && temp1 <= 57)
+                            x = (int)temp1 - 48;
+                        if (temp1 >= 65 && temp1 <= 70)
+                            x = (int)temp1 - 55;
+                    }
+                    else
+                        x = (int)temp1;
+                    if (temp2 >= 49 && temp2 <= 57 || temp2 >= 65 && temp2 <= 70)
+                    {
+                        if (temp2 >= 49 && temp2 <= 57)
+                            y = (int)temp2 - 48;
+                        if (temp2 >= 65 && temp2 <= 70)
+                            y = (int)temp2 - 55;
+                    }
+                    else
+                        y = (int)temp2;
+                    flag = A.isVaild(x, y, table);
+                    table.draw();
+                }
+                if (table.isWin_black(x, y))
+                {
+                    A.display_WIN();
+                    WIN = true;
+                    flag = false;
+                }
+                else
+                    flag = true;
+                while (flag)
+                {
+                    cout << "请白棋玩家输入落子位置\n";
+                    
+                    cin >> temp1 >> temp2;
+                    fflush(stdin);
+                    if (temp1 >= 49 && temp1 <= 57 || temp1 >= 65 && temp1 <= 70)
+                    {
+                        if (temp1 >= 49 && temp1 <= 57)
+                            x = (int)temp1 - 48;
+                        if (temp1 >= 65 && temp1 <= 70)
+                            x = (int)temp1 - 55;
+                    }
+                    else
+                        x = (int)temp1;
+                    if (temp2 >= 49 && temp2 <= 57 || temp2 >= 65 && temp2 <= 70)
+                    {
+                        if (temp2 >= 49 && temp2 <= 57)
+                            y = (int)temp2 - 48;
+                        if (temp2 >= 65 && temp2 <= 70)
+                            y = (int)temp2 - 55;
+                    }
+                    else
+                        y = (int)temp2;
+                    flag = B.isVaild(x, y, table);
+                    table.draw();
+                    if (table.isWin_white(x, y))
+                    {
+                        B.display_WIN();
+                        WIN = true;
+                    }
+                }
+                if (WIN)
+                {
+                    break;
+                }
+            }
+            if (table.display())
+            {
+                table.clean();
+                goto AGAIN;
+            }
+            else
+            {
+                system("cls");
+                table.clean();
+                score[0] = 0;
+                score[1] = 0;
+                goto begin;
+            }
+        }
+        else if (a == 1)
+        {
+            while (1)
+            {
+
+                char arr[5];
+                ai data;
+                char temp1;
+                char temp2;
+                int x, y, X, Y;
+                table.draw();
+                while (1)
+                {
+                    while (1)
+                    {
+                        cout << "请玩家落子!\n" << endl;
+                        cin >> temp1 >> temp2;
+                        fflush(stdin);
+                        if (temp1 >= 49 && temp1 <= 57 || temp1 >= 65 && temp1 <= 70)
+                        {
+                            if (temp1 >= 49 && temp1 <= 57)
+                                x = (int)temp1 - 48;
+                            if (temp1 >= 65 && temp1 <= 70)
+                                x = (int)temp1 - 55;
+                        }
+                        else
+                            x = (int)temp1;
+                        if (temp2 >= 49 && temp2 <= 57 || temp2 >= 65 && temp2 <= 70)
+                        {
+                            if (temp2 >= 49 && temp2 <= 57)
+                                y = (int)temp2 - 48;
+                            if (temp2 >= 65 && temp2 <= 70)
+                                y = (int)temp2 - 55;
+                        }
+                        else
+                            y = (int)temp2;
+                        
+                        if (A.isVaild(x, y, table))
+                        {
+                            ;
+                        }
+                        else break;
+                    }
+                    if (table.isWin_black(x, y))
+                    {
+                        A.display_AI_WIN();
+                        break;
+                    }
+                    table.draw();
+                    data = AI.AICalculate(table);
+                    X = data.x + 1;
+                    Y = data.y + 1;
+                    puts("电脑正在思考......\n");
+                    Sleep(rand() % 2500);
+                    table.putWhite(X, Y);
+                    table.draw();
+                    if (table.isWin_white(X, Y))
+                    {
+                        score[3]++;
+                        cout << "电脑获得胜利!\n\a";
+                        break;
+                    }
+                }
+                cout << "当前比分：玩家" << score[2] << "  " << "电脑" << score[3] << endl;
+                cout << "是否想再玩一把？(Y/N)" << endl;
+                cin >> arr;
+                if (strcmp(arr, arrY) == 0 || strcmp(arr, arry) == 0)
+                {
+                    table.clean();
+                    system("cls");
+                }
+                    
+                else
+                {
+                    table.clean();
+                    system("cls");
+                    score[3] = 0;
+                    score[2] = 0;
+                    goto begin;
+                }
+                    
+
+            }
+        }
+    }
 };
 void menu()
 {
     cout << "######################################\n";
     cout << "###########欢迎来到五子棋！###########\n";
-    cout << "######################################\n";
+    cout << "######################################\n\a";
     Sleep(1500);
     system("cls");
 }
-int Choose() 
-{
-int choose;
-    begin:
-    cout << "##########################################################\n";
-    cout << "########1 人机对抗   2 双人对抗   3 规则    0 退出########\n";
-    cout << "##########################################################\n";
-    cin >> choose;
-if (choose != 1 && choose != 2  && choose !=3 &&  choose!=0)
-{
-    cout << "请重新输入!\n";
-    goto begin;
-}
-else
-{
-    if (choose == 1)
-    {
-        int color;
-        Begin:
-        cout << "请选择你想要使用的棋子\n0   黑棋 1   白棋\n";
-        cin >> color;
-        if (color == 0 || color == 1)
-        {
-            return color;
-        }
-        else
-        {
-            cout << "输入错误，请重新输入！\n";
-            goto Begin;
-        }
-    }
-    else if (choose == 2)
-    {
-        return 3;
-    }
-    else if (choose == 3)
-    {
-        cout;
-    }
-    else if (choose == 0)
-    {
-        exit;
-    }
-} 
-}
+
 int main()
 {
+    srand(time(NULL));
     Board table;
     player A('X');
     player B('O');
+    ComputerPlayer AI;
+    Game game;
     menu();
-    int a = Choose();
-    if (a == 3)
-    {
-        AGAIN:
-        int x, y;
-        int i = 0;
-        table.draw();
-        while (1) {
-            bool flag = true;
-            bool WIN = false;
-            while (flag)
-            {
-                cout << "请黑棋玩家输入落子位置\n";
-                cin >> x >> y;
-                flag = A.isVaild(x, y, table);
-                table.draw();
-            }
-            if (table.isWin(x, y))
-            {
-                A.display_WIN();
-                WIN = true;//跳出循环
-                flag = false;
-            }
-            else
-                flag = true;
-            while(flag)
-            {
-                cout << "请白棋玩家输入落子位置\n";
-                cin >> x >> y;
-                flag=B.isVaild(x, y, table);
-                table.draw();
-                if (table.isWin(x, y))
-                {
-                    B.display_WIN();
-                    WIN = true;
-                }   
-            }
-            if (WIN)
-            {
-                break;
-            }
-        }
-        if (table.display())
-        {
-            table.clean();
-            goto AGAIN;
-        }
-        else
-        {
-            system("cls");
-            table.clean();
-            Choose();
-        }
-
-    }
+    game.menu2(game, table, A, B,AI);
 }
+
+
+
+
+
+
+
+
+
