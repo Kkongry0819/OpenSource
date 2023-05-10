@@ -1,13 +1,8 @@
 #include<iostream>
 #include<Windows.h>
 using namespace std;
+#define COUNT 3
 #define BOARD_SIZE 4
-char arrY[] = "Y";
-char arry[] = "y";
-char arrN[] = "N";
-char arrn[] = "n";
-#define WIN_COUNT 3
-//¡ñ¡ð 
 
 class Board {
 public:
@@ -31,178 +26,189 @@ public:
 			}
 		}
 	}
-    // ÅÐ¶ÏÄ³¸öÎ»ÖÃÊÇ·ñÎª¿Õ
+    void PrintBoard()
+    {
+        cout << endl;
+        cout << "  1   2   3   4" << endl;
+        cout << "1 " << board[0][0] << " | " << board[0][1] << " | " << board[0][2] << " | " << board[0][3] << endl;
+        cout << " ---|---|---|---" << endl;;
+        cout << "2 " << board[1][0] << " | " << board[1][1] << " | " << board[1][2] << " | " << board[1][3] << endl;
+        cout << " ---|---|---|---" << endl;
+        cout << "3 " << board[2][0] << " | " << board[2][1] << " | " << board[2][2] << " | " << board[2][3] << endl;
+        cout << " ---|---|---|---" << endl;
+        cout << "4 " << board[3][0] << " | " << board[3][1] << " | " << board[3][2] << " | " << board[3][3] << endl;
+        cout << endl;
+        cout << endl;
+    }
+    // åˆ¤æ–­æŸä¸ªä½ç½®æ˜¯å¦ä¸ºç©º
     bool isEmpty(int x, int y)
     {
         return board[x - 1][y - 1] == ' ';
     }
 
-    // ÅÐ¶ÏÄ³¸öÎ»ÖÃÊÇ·ñÎªºÚ×Ó
+    // åˆ¤æ–­æŸä¸ªä½ç½®æ˜¯å¦ä¸ºé»‘å­
     bool isBlack(int x, int y)
     {
-        return board[x - 1][y - 1] == 'X';
+        if (board[x][y] == 'X')
+        {
+            return true;
+        }
+        else
+            return false;
     }
 
-    // ÅÐ¶ÏÄ³¸öÎ»ÖÃÊÇ·ñÎª°××Ó
+    // åˆ¤æ–­æŸä¸ªä½ç½®æ˜¯å¦ä¸ºç™½å­
     bool isWhite(int x, int y)
     {
-        return board[x - 1][y - 1] == 'O';
+        if (board[x][y] == 'O')
+        {
+            return true;
+        }
+        else
+            return false;
     }
 
-    // ÏÂºÚ×Ó
+    // ä¸‹é»‘å­
     void putBlack(int x, int y)
     {
         board[x - 1][y - 1] = 'X';
     }
 
-    // ÏÂ°××Ó
+    // ä¸‹ç™½å­
     void putWhite(int x, int y)
     {
         board[x - 1][y - 1] = 'O';
     }
 
-    // ÅÐ¶ÏÊÇ·ñÊ¤Àû
-    bool isWin_Black(int x, int y)
+    // åˆ¤æ–­æ˜¯å¦èƒœåˆ©
+    bool WIN_1(int x, int y)
     {
 
         int count = 1;
-        for (int i = y - 1; i >= 0 && isBlack(x, i); i--)
+        for (int i = y - 2; i >= 0 && isBlack(x-1, i); i--)
         {
             count++;
         }
-        for (int i = y + 1; i < BOARD_SIZE && isBlack(x, i); i++)
+        for (int i = y ; i < BOARD_SIZE && isBlack(x-1, i); i++)
         {
             count++;
         }
-        if (count >= WIN_COUNT)
+        if (count >= COUNT)
         {
             return true;
         }
 
 
         count = 1;
-        for (int i = x - 1; i >= 0 && isBlack(i, y); i--)
+        for (int i = x - 2; i >= 0 && isBlack(i, y-1); i--)
         {
             count++;
         }
-        for (int i = x + 1; i < BOARD_SIZE && isBlack(i, y); i++)
+        for (int i = x ; i < BOARD_SIZE && isBlack(i, y-1); i++)
         {
             count++;
         }
-        if (count >= WIN_COUNT)
+        if (count >= COUNT)
         {
             return true;
         }
 
 
         count = 1;
-        for (int i = x - 1, j = y - 1; i >= 0 && j >= 0 && isBlack(i, j); i--, j--)
+        for (int i = x - 2, j = y - 2; i >= 0 && j >= 0 && isBlack(i, j); i--, j--)
         {
             count++;
         }
-        for (int i = x + 1, j = y + 1; i < BOARD_SIZE && j < BOARD_SIZE && isBlack(i, j); i++, j++)
+        for (int i = x, j = y ; i < BOARD_SIZE && j < BOARD_SIZE && isBlack(i, j); i++, j++)
         {
             count++;
         }
-        if (count >= WIN_COUNT)
+        if (count >= COUNT)
         {
             return true;
         }
 
         count = 1;
-        for (int i = x - 1, j = y + 1; i >= 0 && j < BOARD_SIZE && isBlack(i, j); i--, j++)
+        for (int i = x -2, j = y; i >= 0 && j < BOARD_SIZE && isBlack(i, j); i--, j++)
         {
             count++;
         }
-        for (int i = x + 1, j = y - 1; i < BOARD_SIZE && j >= 0 && isBlack(i, j); i++, j--)
+        for (int i = x , j = y - 2; i < BOARD_SIZE && j >= 0 && isBlack(i, j); i++, j--)
         {
             count++;
         }
-        if (count >= WIN_COUNT)
+        if (count >= COUNT)
         {
             return true;
         }
         return false;
 
     }
-    bool isWin_White(int x, int y)
+    bool WIN_2(int x, int y)
     {
 
         int count = 1;
-        for (int i = y - 1; i >= 0 && isWhite(x , i); i--)
+        for (int i = y - 2; i >= 0 && isWhite(x-1 , i); i--)
         {
             count++;
         }
-        for (int i = y+1; i < BOARD_SIZE && isWhite(x, i); i++)
+        for (int i = y; i < BOARD_SIZE && isWhite(x-1, i); i++)
         {
             count++;
         }
-        if (count >= WIN_COUNT)
+        if (count >= COUNT)
         {
             return true;
         }
 
         
         count = 1;
-        for (int i = x - 1; i >= 0 && isWhite(i, y); i--)
+        for (int i = x - 2; i >= 0 && isWhite(i, y-1); i--)
         {
             count++;
         }
-        for (int i = x+1; i < BOARD_SIZE && isWhite(i, y ); i++)
+        for (int i = x; i < BOARD_SIZE && isWhite(i, y-1 ); i++)
         {
             count++;
         }
-        if (count >= WIN_COUNT)
+        if (count >= COUNT)
         {
             return true;
         }
 
          
         count = 1;
-        for (int i = x - 1, j = y - 1; i >= 0 && j >= 0 && isWhite(i, j); i--, j--)
+        for (int i = x - 2, j = y - 2; i >= 0 && j >= 0 && isWhite(i, j); i--, j--)
         {
             count++;
         }
-        for (int i = x+1, j = y+1; i < BOARD_SIZE && j < BOARD_SIZE && isWhite(i, j); i++, j++)
+        for (int i = x, j = y; i < BOARD_SIZE && j < BOARD_SIZE && isWhite(i, j); i++, j++)
         {
             count++;
         }
-        if (count >= WIN_COUNT)
+        if (count >= COUNT)
         {
             return true;
         }
 
 
         count = 1;
-        for (int i = x - 1, j = y+1; i >= 0 && j < BOARD_SIZE && isWhite(i, j); i--, j++)
+        for (int i = x - 2, j = y; i >= 0 && j < BOARD_SIZE && isWhite(i, j); i--, j++)
         {
             count++;
         }
-        for (int i = x+1, j = y - 1; i < BOARD_SIZE && j >= 0 && isWhite(i, j); i++, j--)
+        for (int i = x, j = y - 2; i < BOARD_SIZE && j >= 0 && isWhite(i, j); i++, j--)
         {
             count++;
         }
-        if (count >= WIN_COUNT)
+        if (count >= COUNT)
         {
             return true;
         }
 
         return false;
     }
-    void PrintBoard()
-    {
-            cout << endl;
-    cout << "  1   2   3   4" << endl;
-    cout << "1 " << board[0][0] << " | " << board[0][1] << " | " << board[0][2] << " | " << board[0][3]<<endl;
-    cout << " ---|---|---|---" << endl;;
-    cout << "2 " << board[1][0] << " | " << board[1][1] << " | " << board[1][2] << " | " << board[1][3] << endl;
-    cout << " ---|---|---|---" << endl;
-    cout << "3 " << board[2][0] << " | " << board[2][1] << " | " << board[2][2] << " | " << board[2][3] << endl;
-    cout << " ---|---|---|---" << endl;
-    cout << "4 " << board[3][0] << " | " << board[3][1] << " | " << board[3][2] << " | " << board[3][3] << endl;
-    cout << endl;
-    cout << endl;
-    }
+    
 private:
 	char board[BOARD_SIZE][BOARD_SIZE];
 };
@@ -216,9 +222,9 @@ public:
     }
     bool isVaild(int x,int y,Board &a) 
     {
-        if (a.isBlack(x, y) || a.isWhite(x , y ) || x - 1 < 0 || y - 1 < 0||x-1>3||y-1>3)
+        if (a.isBlack(x-1, y-1) || a.isWhite(x-1 , y-1 ) || x - 1 < 0 || y - 1 < 0||x-1>3||y-1>3)
         {
-            cout << "ÄãÊäÈëÁËÒ»¸ö·Ç·¨Öµ\n";
+            cout << "ä½ è¾“å…¥äº†ä¸€ä¸ªéžæ³•å€¼\n";
             return false;
         }
         else
@@ -237,9 +243,9 @@ public:
         score[0] = 0;
         score[1] = 0;
     }
-    void Begin()//»¶Ó­Ò³
+    void Begin()//æ¬¢è¿Žé¡µ
     {
-        cout << "»¶Ó­À´µ½Èý×ÓÆå£¡\a\n";
+        cout << "æ¬¢è¿Žæ¥åˆ°ä¸‰å­æ£‹ï¼\a\n";
         Sleep(1000);
         system("cls");
     }
@@ -248,7 +254,7 @@ public:
         
         while (1)
         {
-            cout << "ÇëÑ¡ÔñºÚÆåÏÈÊÖ»¹ÊÇ°×ÆåÏÈÊÖ£¿\nÈç¹ûÊÇºÚÆå£¬ÇëÊäÈë1£¬Èç¹ûÊÇ°×Æå£¬ÇëÊäÈë0\n";
+            cout << "è¯·é€‰æ‹©é»‘æ£‹å…ˆæ‰‹è¿˜æ˜¯ç™½æ£‹å…ˆæ‰‹ï¼Ÿ\nå¦‚æžœæ˜¯é»‘æ£‹ï¼Œè¯·è¾“å…¥1ï¼Œå¦‚æžœæ˜¯ç™½æ£‹ï¼Œè¯·è¾“å…¥0\n";
             cin >> Player_NUM;
             if (Player_NUM == 0|| Player_NUM==1)
             {
@@ -257,7 +263,7 @@ public:
             }
             else
             {
-                cout << "ÄãÊäÈëÁËÒ»¸ö´íÎóµÄÖµ£¬ÇëÖØÐÂÊäÈë£¡\n";
+                cout << "ä½ è¾“å…¥äº†ä¸€ä¸ªé”™è¯¯çš„å€¼ï¼Œè¯·é‡æ–°è¾“å…¥ï¼\n";
             }
         }
     }
@@ -266,10 +272,10 @@ public:
         int x=0, y=0;
         if (Player_NUM == 1)
         {
+            Player_NUM -= 1;
             while (1)
             {
-                cout << "ÇëºÚÆåÊäÈëÏÂÆåµÄ×ø±ê\n";
-                Player_NUM -= 1;
+                cout << "è¯·é»‘æ£‹è¾“å…¥ä¸‹æ£‹çš„åæ ‡\n";
                 cin >> x >> y;
                 if (A.isVaild(x, y, a))
                 {
@@ -277,7 +283,7 @@ public:
                     break;
                 }
             }
-            if (a.isWin_Black(x, y))
+            if (a.WIN_1(x, y))
             {
                 score[0]++;
                 return true;
@@ -287,11 +293,10 @@ public:
         }
         else
         {
-          
+            Player_NUM += 1;
             while (1)
             {
-                cout << "Çë°×ÆåÊäÈëÏÂÆåµÄ×ø±ê\n";
-                Player_NUM += 1;
+                cout << "è¯·ç™½æ£‹è¾“å…¥ä¸‹æ£‹çš„åæ ‡\n";
                 cin >> x >> y;
                 if (B.isVaild(x, y, a))
                 {
@@ -299,7 +304,7 @@ public:
                     break;
                 }
             }
-            if (a.isWin_White(x, y))
+            if (a.WIN_2(x, y))
               {
                 score[1]++;
                 return true;
@@ -311,17 +316,17 @@ public:
     }
     void Score_Table()
     {
-        cout << "µ±Ç°£¬ºÚÆå" << score[0] << "   " << "°×Æå" << score[1] << endl;
+        cout << "å½“å‰ï¼Œé»‘æ£‹" << score[0] << "   " << "ç™½æ£‹" << score[1] << endl;
     }
     void WIN()
     {
         if (Player_NUM == 0)
         {
-            cout << "ºÚÆåÊ¤Àû£¡\n";
+            cout << "é»‘æ£‹èƒœåˆ©ï¼\n";
         }
         else
         {
-            cout << "°×ÆåÊ¤Àû£¡\n";
+            cout << "ç™½æ£‹èƒœåˆ©ï¼\n";
         }
     }
 private:
@@ -330,6 +335,7 @@ private:
 };
 int main()
 {
+   
     char arr[5];
     bool flag = true;
     Game game;
@@ -351,13 +357,13 @@ int main()
             }
         }
         game.Score_Table();
-        cout << "ÊÇ·ñÏëÔÙÍæÒ»°Ñ£¿(Y/N)" << endl;
+        cout << "æ˜¯å¦æƒ³å†çŽ©ä¸€æŠŠ?" << endl;
         cin >> arr;
-        if (strcmp(arr, arrY) == 0 || strcmp(arr, arry) == 0)
+        if (strcmp(arr,"Y") == 0 || strcmp(arr, "y") == 0)
             flag = true;
         else
             flag = false;
     }
 
-    return 0;
+    exit;
 }
