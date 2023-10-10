@@ -2,74 +2,74 @@
 bool InitDatatype() {
     Type = (datatype*)malloc(sizeof(datatype));
     datatype* temporary = Type;
-    strcpy(temporary->type, "Ö°¹¤ĞÕÃû");
-    value[KEY++] = "Ö°¹¤ĞÕÃû";
+    strcpy(temporary->type, "èŒå·¥å§“å");
+    value[KEY++] = "èŒå·¥å§“å";
 
-    temporary->next = new datatype; // ·ÖÅäĞÂµÄÄÚ´æ
+    temporary->next = new datatype; // åˆ†é…æ–°çš„å†…å­˜
     temporary->next = NULL;
-    temporary->type[0] = '\0'; // ½«×Ö·û´®ÖÃÎª¿Õ
+    temporary->type[0] = '\0'; // å°†å­—ç¬¦ä¸²ç½®ä¸ºç©º
 
-    strcpy(temporary->type, "²¿ÃÅÃû³Æ");
-    value[KEY++] = "²¿ÃÅÃû³Æ";
+    strcpy(temporary->type, "éƒ¨é—¨åç§°");
+    value[KEY++] = "éƒ¨é—¨åç§°";
 
-    temporary->next = new datatype; // ·ÖÅäĞÂµÄÄÚ´æ
+    temporary->next = new datatype; // åˆ†é…æ–°çš„å†…å­˜
     temporary = temporary->next;
     temporary->next = NULL;
-    temporary->type[0] = '\0'; // ½«×Ö·û´®ÖÃÎª¿Õ
+    temporary->type[0] = '\0'; // å°†å­—ç¬¦ä¸²ç½®ä¸ºç©º
 
-    strcpy(temporary->type, "Ö°³Æ");
-    value[KEY++] = "Ö°³Æ";
+    strcpy(temporary->type, "èŒç§°");
+    value[KEY++] = "èŒç§°";
 
-    temporary->next = new datatype; // ·ÖÅäĞÂµÄÄÚ´æ
+    temporary->next = new datatype; // åˆ†é…æ–°çš„å†…å­˜
     temporary = temporary->next;
     temporary->next = NULL;
-    temporary->type[0] = '\0'; // ½«×Ö·û´®ÖÃÎª¿Õ
+    temporary->type[0] = '\0'; // å°†å­—ç¬¦ä¸²ç½®ä¸ºç©º
 
-    strcpy(temporary->type, "¹¤×ÊÊı");
-    value[KEY++] = "¹¤×ÊÊı";
+    strcpy(temporary->type, "å·¥èµ„æ•°");
+    value[KEY++] = "å·¥èµ„æ•°";
 
-    temporary->next = new datatype; // ·ÖÅäĞÂµÄÄÚ´æ
+    temporary->next = new datatype; // åˆ†é…æ–°çš„å†…å­˜
     temporary = temporary->next;
     temporary->next = NULL;
-    temporary->type[0] = '\0'; // ½«×Ö·û´®ÖÃÎª¿Õ
+    temporary->type[0] = '\0'; // å°†å­—ç¬¦ä¸²ç½®ä¸ºç©º
 
-    strcpy(temporary->type, "ÁªÏµµç»°");
-    value[KEY++] = "ÁªÏµµç»°";
+    strcpy(temporary->type, "è”ç³»ç”µè¯");
+    value[KEY++] = "è”ç³»ç”µè¯";
 
-    temporary->next = new datatype; // ·ÖÅäĞÂµÄÄÚ´æ
+    temporary->next = new datatype; // åˆ†é…æ–°çš„å†…å­˜
     temporary = temporary->next;
     temporary->next = NULL;
-    temporary->type[0] = '\0'; // ½«×Ö·û´®ÖÃÎª¿Õ
+    temporary->type[0] = '\0'; // å°†å­—ç¬¦ä¸²ç½®ä¸ºç©º
 
-    strcpy(temporary->type, "Î¢ĞÅºÅ");
-    value[KEY++] = "Î¢ĞÅºÅ";
+    strcpy(temporary->type, "å¾®ä¿¡å·");
+    value[KEY++] = "å¾®ä¿¡å·";
 
 	/*
-    temporary->next = new datatype; // ·ÖÅäĞÂµÄÄÚ´æ
+    temporary->next = new datatype; // åˆ†é…æ–°çš„å†…å­˜
 	temporary = temporary->next;
 	temporary->next = NULL;
-	temporary->type[0] = '\0'; // ½«×Ö·û´®ÖÃÎª¿Õ
+	temporary->type[0] = '\0'; // å°†å­—ç¬¦ä¸²ç½®ä¸ºç©º
 
 	strcpy(temporary->type, "XXXXX");
 	value[KEY++] = "XXXXX";
     */
-    temporary->next = NULL; // ×îºóÒ»¸ö½ÚµãµÄnextÓ¦¸ÃÖÃÎªNULL
+    temporary->next = NULL; // æœ€åä¸€ä¸ªèŠ‚ç‚¹çš„nextåº”è¯¥ç½®ä¸ºNULL
 
     return true;
 }
 
 
-bool InitEmployee_list(employee_list& A)//´øÍ·½ÚµãµÄ¶şÎ¬Á´±í
+bool InitEmployee_list(employee_list& A)//å¸¦å¤´èŠ‚ç‚¹çš„äºŒç»´é“¾è¡¨
 {
     A = new employee_list_node;
     if (A) {
-        // Ê¹ÓÃ strncpy ½«×Ö·û´®¸´ÖÆµ½ NO ×Ö¶ÎÖĞ
+        // ä½¿ç”¨ strncpy å°†å­—ç¬¦ä¸²å¤åˆ¶åˆ° NO å­—æ®µä¸­
         strncpy(A->NO, "-999999999", MAX_NO_SIZE);
-        A->data = NULL; // ³õÊ¼»¯Êı¾İ³ÉÔ±Îª NULL
-        A->next = NULL; // ³õÊ¼»¯ÏÂÒ»¸ö½ÚµãÎª NULL
+        A->data = NULL; // åˆå§‹åŒ–æ•°æ®æˆå‘˜ä¸º NULL
+        A->next = NULL; // åˆå§‹åŒ–ä¸‹ä¸€ä¸ªèŠ‚ç‚¹ä¸º NULL
         return true;
     }
-    return false; // ÄÚ´æ·ÖÅäÊ§°ÜÊ±·µ»Ø false
+    return false; // å†…å­˜åˆ†é…å¤±è´¥æ—¶è¿”å› false
 }
 bool Empolyee_Data_Storage(employee_list& A)
 {
@@ -87,11 +87,11 @@ bool Empolyee_Data_Storage(employee_list& A)
     x->next = s;
     x = s;
     begin:
-    printf("ÇëÊäÈë¸ÃÖ°Ô±%dÎ»±àºÅ:\n", MAX_NO_SIZE-1);
+    printf("è¯·è¾“å…¥è¯¥èŒå‘˜%dä½ç¼–å·:\n", MAX_NO_SIZE-1);
     cin>>temp;
     if (strlen(temp) != MAX_NO_SIZE-1)
     {
-        cout << "±àºÅ³¤¶È²»·û£¬ÇëÖØĞÂÊäÈë£¡" << endl;
+        cout << "ç¼–å·é•¿åº¦ä¸ç¬¦ï¼Œè¯·é‡æ–°è¾“å…¥ï¼" << endl;
         goto begin;
     }
     strcpy(x->NO , temp);
@@ -102,7 +102,7 @@ bool Empolyee_Data_Storage(employee_list& A)
     for (int i = 0;i < KEY;i++)
     {
         y->key = i;
-        cout << "ÇëÊäÈë¸ÃÖ°Ô±µÄ" << value[i] << "£º" << endl;
+        cout << "è¯·è¾“å…¥è¯¥èŒå‘˜çš„" << value[i] << "ï¼š" << endl;
         cin >> y->data;
         if (i == 1)
         {
@@ -195,11 +195,11 @@ void Print_TotalSalary_By_Department()
             address* b = &(a->Address);
             while (b->next != NULL)
             {
-                auto [p, ec] = from_chars(b->ADDRESS->data->next->next->next->data.c_str(), b->ADDRESS->data->next->next->next->data.c_str() + b->ADDRESS->data->next->next->next->data.length(), result);//C++17ĞÂµÄ¿âº¯Êı
+                auto [p, ec] = from_chars(b->ADDRESS->data->next->next->next->data.c_str(), b->ADDRESS->data->next->next->next->data.c_str() + b->ADDRESS->data->next->next->next->data.length(), result);//C++17æ–°çš„åº“å‡½æ•°
                 sum += result;
                 b = b->next;
             }
-            auto [p, ec] = from_chars(b->ADDRESS->data->next->next->next->data.c_str(), b->ADDRESS->data->next->next->next->data.c_str() + b->ADDRESS->data->next->next->next->data.length(), result);//C++17ĞÂµÄ¿âº¯Êı
+            auto [p, ec] = from_chars(b->ADDRESS->data->next->next->next->data.c_str(), b->ADDRESS->data->next->next->next->data.c_str() + b->ADDRESS->data->next->next->next->data.length(), result);//C++17æ–°çš„åº“å‡½æ•°
             sum += result;
             cout << a->name << "  " << "\033[31;1m" << "total" << "\033[0m" << "  " << sum << endl;
             a = a->next;
@@ -207,7 +207,7 @@ void Print_TotalSalary_By_Department()
     }
     else
     {
-        cout << "ÎŞÔ±¹¤¡£" << endl;
+        cout << "æ— å‘˜å·¥ã€‚" << endl;
     }
 }
 
@@ -218,7 +218,7 @@ void Print_Sheet_By_Department()
         department_name_node* a = department;
         for (int i = 0;i < DepartmentNum;i++)
         {
-            cout << "\033[31;1m" << a->name << "£º" << "\033[0m" << endl;
+            cout << "\033[31;1m" << a->name << "ï¼š" << "\033[0m" << endl;
             for (address* j = &(a->Address);j != NULL;j = j->next)
             {
                 cout << j->ADDRESS->NO << "  ";
@@ -236,7 +236,7 @@ void Print_Sheet_By_Department()
     }
     else
     {
-        cout << "ÎŞÔ±¹¤" << endl;
+        cout << "æ— å‘˜å·¥" << endl;
     }
 }
 void Delete_Field(employee_list& A)
@@ -244,7 +244,7 @@ void Delete_Field(employee_list& A)
     char deleteNO[MAX_NO_SIZE];
     employee_list x = A->next;
     employee_list y = A;
-    cout << "ÇëÊäÈëÒªÉ¾³ıµÄÖ°Ô±±àºÅ: ";
+    cout << "è¯·è¾“å…¥è¦åˆ é™¤çš„èŒå‘˜ç¼–å·: ";
     cin >> deleteNO;
     while (x!= NULL)
     {
@@ -257,7 +257,7 @@ void Delete_Field(employee_list& A)
     }
     if (x != NULL && strcmp(x->NO, deleteNO) == 0)
     {
-        department_name temp = department;//ÁÙÊ±²¿ÃÅ½á¹¹Ìå±äÁ¿
+        department_name temp = department;//ä¸´æ—¶éƒ¨é—¨ç»“æ„ä½“å˜é‡
         department_name temp2 = department;
         while (temp != NULL)
         {
@@ -279,7 +279,7 @@ void Delete_Field(employee_list& A)
                     }
                         
                 }
-                if (temp == department&& T == &(temp->Address))//µÚÒ»ĞĞµÚÒ»ÁĞ
+                if (temp == department&& T == &(temp->Address))//ç¬¬ä¸€è¡Œç¬¬ä¸€åˆ—
                 {
                     if (T->next == NULL)
                     {
@@ -294,13 +294,13 @@ void Delete_Field(employee_list& A)
                     DepartmentNum--;
                     break;
                 }
-                else if(temp == department && T != &(temp->Address))//µÚÒ»ĞĞµÚNÁĞ
+                else if(temp == department && T != &(temp->Address))//ç¬¬ä¸€è¡Œç¬¬Nåˆ—
                 {
                     T1->next = T->next;
                     delete T;
                     break;
                 }
-                else if (temp != department && T == &(temp->Address))//µÚNĞĞµÚÒ»ÁĞ
+                else if (temp != department && T == &(temp->Address))//ç¬¬Nè¡Œç¬¬ä¸€åˆ—
                 {
                     if (T->next == NULL)
                     {
@@ -331,11 +331,11 @@ void Delete_Field(employee_list& A)
         y->next = x->next;
         delete x;
         Count--;
-        cout << "É¾³ı³É¹¦£¡" << endl;
+        cout << "åˆ é™¤æˆåŠŸï¼" << endl;
     }
     else 
     {
-        cout << "²éÎŞ´ËÈË" << endl;
+        cout << "æŸ¥æ— æ­¤äºº" << endl;
     }
 }
 
@@ -343,7 +343,7 @@ void Delete_Field(employee_list& A)
 //{
 //    string job;
 //    string salary;
-//    cout << "ÇëÊäÈëÖ°³Æ£º" << endl;
+//    cout << "è¯·è¾“å…¥èŒç§°ï¼š" << endl;
 //    cin >> job;
 //    employee_list_node*  x= A->next;
 //    Job* c= new Job ;
@@ -366,12 +366,12 @@ void Delete_Field(employee_list& A)
 //    }
 //    if (c->next == NULL)
 //    {
-//        cout << "Î´²éµ½ÓĞ´Ë¸ÚÎ»µÄÈËÔ±£¡" << endl;
+//        cout << "æœªæŸ¥åˆ°æœ‰æ­¤å²—ä½çš„äººå‘˜ï¼" << endl;
 //        return;
 //    }
 //    else
 //    {
-//        cout << "ÇëÊäÈë¸Ã¸ÚÎ»µ÷ÕûºóµÄ¹¤×Ê£º" << endl;
+//        cout << "è¯·è¾“å…¥è¯¥å²—ä½è°ƒæ•´åçš„å·¥èµ„ï¼š" << endl;
 //        cin >> salary;
 //        d = c;
 //        while (d != NULL)
@@ -385,7 +385,7 @@ void Delete_Field(employee_list& A)
 //            d = d->next;
 //        }
 //        delete c;
-//        cout << "µ÷ÕûÍê³É£¬µ÷ÕûºóµÄ¹¤×ÊÎª: " << salary << endl;
+//        cout << "è°ƒæ•´å®Œæˆï¼Œè°ƒæ•´åçš„å·¥èµ„ä¸º: " << salary << endl;
 //    }
 //}
 void ChangeSalary_By_Job(employee_list& A) 
@@ -393,7 +393,7 @@ void ChangeSalary_By_Job(employee_list& A)
     string job;
     string salary;
 
-    cout << "ÇëÊäÈëÖ°³Æ£º" << endl;
+    cout << "è¯·è¾“å…¥èŒç§°ï¼š" << endl;
     cin >> job;
 
     employee_list_node* x = A->next;
@@ -426,13 +426,13 @@ void ChangeSalary_By_Job(employee_list& A)
 
     if (c->next->jOb==NULL) 
     {
-        cout << "Î´²éµ½ÓĞ´Ë¸ÚÎ»µÄÈËÔ±£¡" << endl;
+        cout << "æœªæŸ¥åˆ°æœ‰æ­¤å²—ä½çš„äººå‘˜ï¼" << endl;
         delete c;
         return;
     }
     else 
     {
-        cout << "ÇëÊäÈë¸Ã¸ÚÎ»µ÷ÕûºóµÄ¹¤×Ê£º" << endl;
+        cout << "è¯·è¾“å…¥è¯¥å²—ä½è°ƒæ•´åçš„å·¥èµ„ï¼š" << endl;
         cin >> salary;
         d = c->next;
         while (d->jOb!= NULL) 
@@ -445,34 +445,34 @@ void ChangeSalary_By_Job(employee_list& A)
             d = d->next;
         }
         delete c;
-        cout << "µ÷ÕûÍê³É£¬µ÷ÕûºóµÄ¹¤×ÊÎª: " << salary << endl;
+        cout << "è°ƒæ•´å®Œæˆï¼Œè°ƒæ•´åçš„å·¥èµ„ä¸º: " << salary << endl;
     }
 }
 
 
 void Sort_Sheet(employee_list_node* head)
 {
-    employee_list_node* pre,* cur, *next, *end;//preÇ°Ò»Ïî curµ±Ç°Ïî nextºóÒ»Ïî end¿ØÖÆÑ­»·´ÎÊı(ÓÅ»¯Ã°Åİ)
+    employee_list_node* pre,* cur, *next, *end;//preå‰ä¸€é¡¹ curå½“å‰é¡¹ nextåä¸€é¡¹ endæ§åˆ¶å¾ªç¯æ¬¡æ•°(ä¼˜åŒ–å†’æ³¡)
     end = NULL;
     if (!head || !head->next)
         return;
     while (head->next != end)
     {
-        //³õÊ¼»¯Èı¸öÖ¸Õë ; ÅĞ¶ÏÊÇ·ñµ½´ï½áÊøÎ»ÖÃ ; Èı¸öÖ¸Õë¼¯ÌåºóÒÆ
+        //åˆå§‹åŒ–ä¸‰ä¸ªæŒ‡é’ˆ ; åˆ¤æ–­æ˜¯å¦åˆ°è¾¾ç»“æŸä½ç½® ; ä¸‰ä¸ªæŒ‡é’ˆé›†ä½“åç§»
         for (pre = head, cur = pre->next, next = cur->next; next != end; pre = pre->next, cur = cur->next, next = next->next)
         {
-            if (strcmp(cur->NO ,next->NO)>0) //´ÓĞ¡µ½´ó
+            if (strcmp(cur->NO ,next->NO)>0) //ä»å°åˆ°å¤§
             {
                 pre->next = next;
                 cur->next = next->next;
                 next->next = cur;
 
-                //´ËÊ±next±äÇ°Ò»Ïî£¬cur±äºóÒ»Ïî  ½»»»next cur
+                //æ­¤æ—¶nextå˜å‰ä¸€é¡¹ï¼Œcurå˜åä¸€é¡¹  äº¤æ¢next cur
                 employee_list_node* temp = cur; cur = next; next = temp;
             }
         }
 
-        //Ò»ÂÖÑ­»·½áÊø ×îºóÒ»ÏîÒÑ¾­ÅÅºÃ endÌáÇ°Ò»Ïî (Ã°ÅİÔ­Àí)
+        //ä¸€è½®å¾ªç¯ç»“æŸ æœ€åä¸€é¡¹å·²ç»æ’å¥½ endæå‰ä¸€é¡¹ (å†’æ³¡åŸç†)
         end = cur;
     }
 }
@@ -483,9 +483,9 @@ void Excel_Dealing(employee_list_node* head)
     libxl::Book* book = xlCreateXMLBook();
     if (book) 
     {
-        // Ìí¼ÓÒ»¸ö¹¤×÷±í
+        // æ·»åŠ ä¸€ä¸ªå·¥ä½œè¡¨
         libxl::Sheet* sheet = book->addSheet(L"Sheet1");
-        sheet->writeStr(2, 0, L"±àºÅ");
+        sheet->writeStr(2, 0, L"ç¼–å·");
         for (int i = 0;i < KEY;i++)
         {
             const char* pCStrKey = value[i].c_str();
@@ -494,7 +494,7 @@ void Excel_Dealing(employee_list_node* head)
             MultiByteToWideChar(CP_OEMCP, 0, pCStrKey, strlen(pCStrKey) + 1, pWCStrKey, pSize);
             sheet->writeStr(2, i+1, pWCStrKey);
         }
-        // Ğ´ÈëÊı¾İµ½µ¥Ôª¸ñ
+        // å†™å…¥æ•°æ®åˆ°å•å…ƒæ ¼
         for (int i = 0;i < Count;i++)
         {
             string temp;
@@ -517,22 +517,22 @@ void Excel_Dealing(employee_list_node* head)
             head = head->next;
         }
 
-        // ±£´æExcelÎÄ¼ş
+        // ä¿å­˜Excelæ–‡ä»¶
         if (book->save(L"Personnel Information System.xlsx")) 
         {
-            std::cout << "ExcelÎÄ¼ş±£´æ³É¹¦!" << std::endl;
+            std::cout << "Excelæ–‡ä»¶ä¿å­˜æˆåŠŸ!" << std::endl;
         }
         else 
         {
-            std::cerr << "±£´æExcelÎÄ¼şÊ§°Ü!" << std::endl;
+            std::cerr << "ä¿å­˜Excelæ–‡ä»¶å¤±è´¥!" << std::endl;
         }
 
-        // ÊÍ·Å×ÊÔ´
+        // é‡Šæ”¾èµ„æº
         book->release();
     }
     else 
     {
-        std::cerr << "´´½¨ExcelÎÄµµÊ§°Ü!" << std::endl;
+        std::cerr << "åˆ›å»ºExcelæ–‡æ¡£å¤±è´¥!" << std::endl;
     }
 }
 
